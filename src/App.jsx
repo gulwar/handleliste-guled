@@ -55,6 +55,17 @@ function App() {
     );
   }
 
+  function changeAmount(id, newAmount) {
+    const tall = Number(newAmount);
+    if (tall <= 0) return; 
+
+    setItems(
+      items.map((item) =>
+        item.id === id ? { ...item, amount: tall } : item
+      )
+    );
+  }
+
   return (
     <main className="page">
       <section className="card">
@@ -102,7 +113,13 @@ function App() {
                 {item.name}
               </span>
 
-              <span className="qty">{item.amount}</span> {}
+              <input
+                className="qty"
+                type="number"
+                min={1}
+                value={item.amount}
+                onChange={(e) => changeAmount(item.id, e.target.value)}
+              />
 
               <button
                 className="delete"
