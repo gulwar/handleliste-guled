@@ -112,7 +112,7 @@ function App() {
               <span className={item.bought ? "name bought" : "name"}>
                 {item.name}
               </span>
-
+              {/* Jeg har spurt KI om hjelp for å fikse denne delen av koden der jeg har måttet gjøre det sånn at tallene i listen kan endres på*/}
               <input
                 className="qty"
                 type="number"
