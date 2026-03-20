@@ -1,4 +1,4 @@
-function ShoppingItem({ item, onToggle, onRemove }) {
+function ShoppingItem({ item, onToggle, onRemove, onChangeAmount }) {
   return (
     <li className="row">
       <input
@@ -6,11 +6,24 @@ function ShoppingItem({ item, onToggle, onRemove }) {
         checked={item.bought}
         onChange={() => onToggle(item.id)}
       />
+
       <span className={item.bought ? "name bought" : "name"}>
         {item.name}
       </span>
-      <span className="qty">{item.amount}</span>
-      <button type="button" className="delete" onClick={() => onRemove(item.id)}>
+
+      <input
+        className="qty"
+        type="number"
+        min={1}
+        value={item.amount}
+        onChange={(e) => onChangeAmount(item.id, e.target.value)}
+      />
+
+      <button
+        type="button"
+        className="delete"
+        onClick={() => onRemove(item.id)}
+      >
         ✕
       </button>
     </li>

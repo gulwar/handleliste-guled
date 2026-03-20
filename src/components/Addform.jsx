@@ -5,19 +5,19 @@ function AddForm({ onadd }) {
   const [qty, setQty] = useState("");
   const [error, setError] = useState("");
 
-  function Handlelistesubmit(e) {
+  function handleListSubmit(e) {
     e.preventDefault();
 
-    if (name === "" && qty === "") {
+    if (name.trim() === "" && qty === "") {
       setError("Fyll inn vare og antall");
       return;
-    } else if (name === "") {
+    } else if (name.trim() === "") {
       setError("Du må skrive inn en vare");
       return;
     } else if (qty === "") {
       setError("Du må skrive inn antall");
       return;
-    } else if (Number(qty) <= 0) { 
+    } else if (Number(qty) <= 0) {
       setError("Antall må være større enn 0");
       return;
     }
@@ -30,26 +30,36 @@ function AddForm({ onadd }) {
 
   return (
     <section>
-      <form onSubmit={Handlelistesubmit}>
-        <input
-          type="text"
-          placeholder="Vare"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+      <form onSubmit={handleListSubmit} className="form">
+        <label className="label">
+          Vare
+          <input
+            className="input"
+            type="text"
+            placeholder="Vare"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
 
-        <input
-          type="number"
-          placeholder="Antall"
-          min="1"
-          value={qty}
-          onChange={(e) => setQty(e.target.value)}
-        />
+        <label className="label">
+          Antall
+          <input
+            className="input"
+            type="number"
+            placeholder="Antall"
+            min="1"
+            value={qty}
+            onChange={(e) => setQty(e.target.value)}
+          />
+        </label>
 
-        <button type="submit">Legg til</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        <button className="button" type="submit">
+          Legg til vare
+        </button>
       </form>
-
-      {error && <p style={{ color: "red" }}>{error}</p>} {/* Feilmelding i rødt */}
     </section>
   );
 }
